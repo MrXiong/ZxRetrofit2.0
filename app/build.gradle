@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.zx.rxjava"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/NOTICE' // will not include NOTICE file
+        exclude 'META-INF/LICENSE' // will not include LICENSE file
+    }
+/*    dataBinding {
+        enabled = true
+    }*/
+}
+
+/*configurations {
+    all*.exclude group: 'xpp3', module: 'xpp3'
+}*/
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.2.1'
+    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //compile 'com.squareup.retrofit2:converter-gson:2.1.0'//ConverterFactory的Gson依赖包
+    compile 'com.squareup.retrofit2:converter-scalars:2.1.0'//ConverterFactory的String依赖包
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'//CallAdapterFactory的Rx依赖包
+   // compile 'com.squareup.retrofit2:converter-simplexml:2.1.0'  //CallAdapterFactory的xml依赖包
+    compile ('com.squareup.retrofit2:converter-simplexml:2.1.0'){
+        exclude group: 'xpp3', module: 'xpp3'
+        exclude group: 'stax', module: 'stax-api'
+        exclude group: 'stax', module: 'stax'
+    }
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'//网络日志打印
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.2.0'//cookie
+    compile 'com.jakewharton:butterknife:7.0.1'
+
+
+    compile 'io.reactivex:rxjava:1.1.0'//Rx的包
+    compile 'io.reactivex:rxandroid:1.1.0'//Rx的包
+    //compile 'com.google.code.gson:gson:2.6.2'//Gosn解析包
+    /*Gson: com.squareup.retrofit2:converter-gson
+    Jackson: com.squareup.retrofit2:converter-jackson
+    Moshi: com.squareup.retrofit2:converter-moshi
+    Protobuf: com.squareup.retrofit2:converter-protobuf
+    Wire: com.squareup.retrofit2:converter-wire
+    Simple XML: com.squareup.retrofit2:converter-simplexml
+    Scalars (primitives, boxed, and String): com.squareup.retrofit2:converter-scalars*/
+
+
+    //替换解析方式
+    //compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    //compile 'com.squareup.retrofit2:converter-moshi:2.1.0'
+    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
+}
